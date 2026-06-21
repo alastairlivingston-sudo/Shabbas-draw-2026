@@ -10,6 +10,7 @@ const REVALIDATE_SECONDS = Number(process.env.LIVE_SYNC_REVALIDATE_SECONDS ?? 36
 type LiveUpdate = {
   matches: Array<Pick<GroupMatch, "id" | "status" | "homeScore" | "awayScore" | "minute">>;
   goalEvents: GoalEvent[];
+  syncedAt: string;
 };
 
 async function buildLiveUpdate(): Promise<LiveUpdate> {
@@ -45,7 +46,7 @@ async function buildLiveUpdate(): Promise<LiveUpdate> {
     }),
   );
 
-  return { matches, goalEvents: goalEventLists.flat() };
+  return { matches, goalEvents: goalEventLists.flat(), syncedAt: new Date().toISOString() };
 }
 
 const getCachedLiveUpdate = unstable_cache(buildLiveUpdate, ["live-update"], {
@@ -57,6 +58,6 @@ export async function GET() {
     const update = await getCachedLiveUpdate();
     return NextResponse.json(update);
   } catch {
-    return NextResponse.json({ matches: [], goalEvents: [] });
+    return NextResponse.json({ matches: [], goalEvents: [], syncedAt: null });
   }
 }

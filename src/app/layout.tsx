@@ -29,12 +29,12 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <header className="border-b">
-          <nav className="mx-auto flex max-w-3xl items-center justify-between px-4 py-3">
-            <Link href="/" className="font-semibold">
+        <header className="sticky top-0 z-10 border-b bg-background/80 backdrop-blur-sm">
+          <nav className="mx-auto flex max-w-2xl items-center justify-between px-3 py-3 sm:px-4">
+            <Link href="/" className="text-sm font-semibold sm:text-base">
               Fantasy Draft Draw
             </Link>
-            <div className="flex gap-4 text-sm text-muted-foreground">
+            <div className="flex gap-3 text-sm text-muted-foreground sm:gap-4">
               <Link href="/" className="hover:text-foreground">
                 Leaderboard
               </Link>

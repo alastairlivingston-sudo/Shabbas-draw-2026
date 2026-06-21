@@ -10,10 +10,12 @@ type DraftStore = {
   matches: GroupMatch[];
   goalEvents: GoalEvent[];
   auditLog: AuditLogEntry[];
+  lastSyncedAt: string | null;
 
   applyLiveUpdate: (update: {
     matches: Array<Pick<GroupMatch, "id" | "status" | "homeScore" | "awayScore" | "minute">>;
     goalEvents: GoalEvent[];
+    syncedAt?: string | null;
   }) => void;
 
   manualUpdateMatch: (
@@ -36,8 +38,9 @@ export const useDraftStore = create<DraftStore>()(
       matches: fixtures,
       goalEvents: [],
       auditLog: [],
+      lastSyncedAt: null,
 
-      applyLiveUpdate: ({ matches: matchUpdates, goalEvents: newGoalEvents }) => {
+      applyLiveUpdate: ({ matches: matchUpdates, goalEvents: newGoalEvents, syncedAt }) => {
         set((state) => {
           const updatedMatches = state.matches.map((match) => {
             if (match.locked) return match;
@@ -58,6 +61,7 @@ export const useDraftStore = create<DraftStore>()(
           return {
             matches: updatedMatches,
             goalEvents: dedupeGoalEvents([...state.goalEvents, ...filteredNewGoals]),
+            lastSyncedAt: syncedAt ?? state.lastSyncedAt,
           };
         });
       },
