@@ -4,11 +4,11 @@ type SeedMatch = Omit<GroupMatch, "status" | "homeScore" | "awayScore" | "minute
 
 const seedMatches: SeedMatch[] = [
   // Group A
-  { id: "a1", group: "A", matchday: 1, homeTeam: "Mexico", awayTeam: "South Africa", kickoff: "2026-06-11T19:00:00Z", venue: "Estadio Banorte, Mexico City" },
+  { id: "a1", group: "A", matchday: 1, homeTeam: "Mexico", awayTeam: "South Africa", kickoff: "2026-06-11T19:00:00Z", venue: "Estadio Azteca, Mexico City" },
   { id: "a2", group: "A", matchday: 1, homeTeam: "Korea", awayTeam: "Czechia", kickoff: "2026-06-12T02:00:00Z", venue: "Estadio Akron, Guadalajara" },
   { id: "a3", group: "A", matchday: 2, homeTeam: "Czechia", awayTeam: "South Africa", kickoff: "2026-06-18T16:00:00Z", venue: "Mercedes-Benz Stadium, Atlanta, Georgia" },
   { id: "a4", group: "A", matchday: 2, homeTeam: "Mexico", awayTeam: "Korea", kickoff: "2026-06-19T01:00:00Z", venue: "Estadio Akron, Guadalajara" },
-  { id: "a5", group: "A", matchday: 3, homeTeam: "Czechia", awayTeam: "Mexico", kickoff: "2026-06-25T01:00:00Z", venue: "Estadio Banorte, Mexico City" },
+  { id: "a5", group: "A", matchday: 3, homeTeam: "Czechia", awayTeam: "Mexico", kickoff: "2026-06-25T01:00:00Z", venue: "Estadio Azteca, Mexico City" },
   { id: "a6", group: "A", matchday: 3, homeTeam: "South Africa", awayTeam: "Korea", kickoff: "2026-06-25T01:00:00Z", venue: "Estadio BBVA, Guadalupe" },
 
   // Group B
