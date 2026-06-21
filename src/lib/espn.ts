@@ -6,6 +6,19 @@ const ESPN_BASE = "https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.wor
 const TEAM_ALIASES: Record<string, string> = {
   "cote divoire": "ivory coast",
   "ivory coast": "ivory coast",
+  "korea republic": "korea",
+  "south korea": "korea",
+  "czech republic": "czechia",
+  "turkey": "turkiye",
+  "united states": "usa",
+  "usmnt": "usa",
+  "bosnia and herzegovina": "bosnia herzegovina",
+  "bosnia": "bosnia herzegovina",
+  "dr congo": "congo dr",
+  "democratic republic of the congo": "congo dr",
+  "congo dr": "congo dr",
+  "cabo verde": "cape verde",
+  "ir iran": "iran",
 };
 
 export function normalizeTeamName(name: string): string {
@@ -14,6 +27,7 @@ export function normalizeTeamName(name: string): string {
     .replace(/[̀-ͯ]/g, "")
     .toLowerCase()
     .trim()
+    .replace(/[-_]/g, " ")
     .replace(/[^a-z0-9 ]/g, "")
     .replace(/\s+/g, " ");
   return TEAM_ALIASES[stripped] ?? stripped;

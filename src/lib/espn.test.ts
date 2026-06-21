@@ -14,6 +14,22 @@ describe("normalizeTeamName", () => {
   it("normalizes Curacao consistently regardless of accent", () => {
     expect(normalizeTeamName("Curaçao")).toBe(normalizeTeamName("Curacao"));
   });
+
+  it("treats common ESPN team-name variants as matching our seed data", () => {
+    expect(normalizeTeamName("South Korea")).toBe(normalizeTeamName("Korea"));
+    expect(normalizeTeamName("Korea Republic")).toBe(normalizeTeamName("Korea"));
+    expect(normalizeTeamName("Czech Republic")).toBe(normalizeTeamName("Czechia"));
+    expect(normalizeTeamName("Turkey")).toBe(normalizeTeamName("Türkiye"));
+    expect(normalizeTeamName("United States")).toBe(normalizeTeamName("USA"));
+    expect(normalizeTeamName("Bosnia and Herzegovina")).toBe(
+      normalizeTeamName("Bosnia-Herzegovina"),
+    );
+    expect(normalizeTeamName("Democratic Republic of the Congo")).toBe(
+      normalizeTeamName("DR Congo"),
+    );
+    expect(normalizeTeamName("Cabo Verde")).toBe(normalizeTeamName("Cape Verde"));
+    expect(normalizeTeamName("IR Iran")).toBe(normalizeTeamName("Iran"));
+  });
 });
 
 describe("dedupeGoalEvents", () => {
