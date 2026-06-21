@@ -3,7 +3,6 @@
 import { useLivePolling } from "@/lib/use-live-polling";
 import { useDraftStore } from "@/lib/store";
 import { getDraftOrder } from "@/lib/draft-order";
-import { LastSyncedBadge } from "@/components/last-synced-badge";
 
 export default function LeaderboardPage() {
   useLivePolling();
@@ -11,22 +10,16 @@ export default function LeaderboardPage() {
   const participants = useDraftStore((state) => state.participants);
   const matches = useDraftStore((state) => state.matches);
   const goalEvents = useDraftStore((state) => state.goalEvents);
-  const lastSyncedAt = useDraftStore((state) => state.lastSyncedAt);
 
   const order = getDraftOrder(participants, matches, goalEvents);
 
   return (
     <div className="mx-auto max-w-2xl px-3 py-4 sm:px-4 sm:py-8">
-      <div className="flex items-start justify-between gap-3">
-        <div>
-          <h1 className="text-xl font-bold sm:text-2xl">Fantasy Draft Draw</h1>
-          <p className="mt-1 text-xs text-muted-foreground sm:text-sm">
-            Pick order is decided by total goals scored in each person&apos;s assigned group. Ties
-            break on the earliest goal.
-          </p>
-        </div>
-        <LastSyncedBadge syncedAt={lastSyncedAt} />
-      </div>
+      <h1 className="text-xl font-extrabold sm:text-2xl">Leaderboard</h1>
+      <p className="mt-1 text-xs text-muted-foreground sm:text-sm">
+        Pick order is decided by total goals scored in each person&apos;s assigned group. Ties
+        break on the earliest goal.
+      </p>
 
       <div className="mt-5 space-y-2">
         {order.map((entry) => {
@@ -40,13 +33,13 @@ export default function LeaderboardPage() {
           return (
             <div
               key={entry.participant.id}
-              className={`flex items-center gap-3 rounded-xl border p-3 ${
+              className={`flex items-center gap-3 rounded-2xl border p-3 shadow-sm ${
                 entry.stillTied
                   ? "border-amber-300 bg-amber-50 dark:border-amber-800 dark:bg-amber-950/30"
                   : "bg-card"
               }`}
             >
-              <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
+              <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-violet-600 to-indigo-600 text-sm font-bold text-white">
                 {entry.pick}
               </div>
 
@@ -73,7 +66,7 @@ export default function LeaderboardPage() {
 
               <div className="flex shrink-0 items-stretch gap-3 text-center">
                 <div>
-                  <div className="text-2xl font-extrabold tabular-nums leading-none">
+                  <div className="text-2xl font-extrabold tabular-nums leading-none text-emerald-600 dark:text-emerald-400">
                     {entry.goals}
                   </div>
                   <div className="mt-1 text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
@@ -84,7 +77,7 @@ export default function LeaderboardPage() {
                 <div>
                   <div
                     className={`text-2xl font-extrabold tabular-nums leading-none ${
-                      remaining === 0 ? "text-muted-foreground" : ""
+                      remaining === 0 ? "text-muted-foreground" : "text-rose-600 dark:text-rose-400"
                     }`}
                   >
                     {remaining}
@@ -106,3 +99,4 @@ export default function LeaderboardPage() {
     </div>
   );
 }
+

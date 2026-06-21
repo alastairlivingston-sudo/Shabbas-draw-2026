@@ -24,10 +24,8 @@ export function LastSyncedBadge({ syncedAt }: { syncedAt: string | null }) {
   }, [syncedAt]);
 
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-2.5 py-1 text-xs font-medium text-secondary-foreground">
-      <span
-        className={`size-1.5 rounded-full ${syncedAt ? "bg-emerald-500" : "bg-muted-foreground"}`}
-      />
+    <span className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-2.5 py-1 text-xs font-medium text-white backdrop-blur-sm">
+      <span className={`size-1.5 rounded-full ${syncedAt ? "bg-emerald-400" : "bg-white/50"}`} />
       {label}
     </span>
   );
