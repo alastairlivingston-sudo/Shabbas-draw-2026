@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useLivePolling } from "@/lib/use-live-polling";
 import { useDraftStore } from "@/lib/store";
 import { getDraftOrder } from "@/lib/draft-order";
@@ -18,7 +19,7 @@ export default function LeaderboardPage() {
       <h1 className="text-xl font-extrabold sm:text-2xl">Leaderboard</h1>
       <p className="mt-1 text-xs text-muted-foreground sm:text-sm">
         Pick order is decided by total goals scored in each person&apos;s assigned group. Ties
-        break on the earliest goal.
+        break on the earliest goal. Tap a name to see their group&apos;s results.
       </p>
 
       <div className="mt-5 space-y-2">
@@ -26,17 +27,15 @@ export default function LeaderboardPage() {
           const groupMatches = matches.filter((m) => m.group === entry.participant.group);
           const played = groupMatches.filter((m) => m.status === "completed").length;
           const remaining = groupMatches.length - played;
-          const fastestGoalMatch = matches.find((m) =>
-            goalEvents.some((g) => g.matchId === m.id && g.minute === entry.fastestGoalMinute),
-          );
 
           return (
-            <div
+            <Link
               key={entry.participant.id}
-              className={`flex items-center gap-3 rounded-2xl border p-3 shadow-sm ${
+              href={`/participant/${entry.participant.id}`}
+              className={`flex items-center gap-3 rounded-2xl border p-3 shadow-sm transition-colors active:scale-[0.99] ${
                 entry.stillTied
                   ? "border-amber-300 bg-amber-50 dark:border-amber-800 dark:bg-amber-950/30"
-                  : "bg-card"
+                  : "bg-card hover:border-violet-300 dark:hover:border-violet-700"
               }`}
             >
               <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-violet-600 to-indigo-600 text-sm font-bold text-white">
@@ -55,11 +54,7 @@ export default function LeaderboardPage() {
                 </p>
                 <p className="mt-0.5 text-[11px] text-muted-foreground">
                   {Number.isFinite(entry.fastestGoalMinute)
-                    ? `Fastest goal ${entry.fastestGoalMinute}'${
-                        fastestGoalMatch
-                          ? ` · ${fastestGoalMatch.homeTeam} v ${fastestGoalMatch.awayTeam}`
-                          : ""
-                      }`
+                    ? `Fastest goal ${entry.fastestGoalMinute}'`
                     : "No goals yet"}
                 </p>
               </div>
@@ -87,7 +82,7 @@ export default function LeaderboardPage() {
                   </div>
                 </div>
               </div>
-            </div>
+            </Link>
           );
         })}
       </div>

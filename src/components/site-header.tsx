@@ -7,6 +7,7 @@ import { LastSyncedBadge } from "@/components/last-synced-badge";
 
 const NAV_LINKS = [
   { href: "/", label: "Leaderboard" },
+  { href: "/scores", label: "Latest Scores" },
   { href: "/fixtures", label: "Fixtures" },
   { href: "/rules", label: "Rules" },
   { href: "/admin", label: "Admin" },
@@ -17,7 +18,7 @@ export function SiteHeader() {
   const lastSyncedAt = useDraftStore((state) => state.lastSyncedAt);
 
   return (
-    <header className="sticky top-0 z-10 bg-gradient-to-r from-violet-700 via-indigo-700 to-violet-800 text-white shadow-md">
+    <header className="sticky top-0 z-10 bg-gradient-to-r from-violet-950 via-indigo-900 to-violet-950 text-white shadow-lg shadow-black/20">
       <nav className="mx-auto flex max-w-2xl items-center justify-between gap-2 px-3 py-3 sm:px-4">
         <Link href="/" className="text-sm font-extrabold tracking-tight sm:text-base">
           ⚽ Draft Draw

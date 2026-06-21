@@ -31,7 +31,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${manrope.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${manrope.variable} dark h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-[family-name:var(--font-manrope)]">
         <SiteHeader />
